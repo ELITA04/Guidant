@@ -2,10 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import ObjectDescriptionScreen from './src/screen/ObjectDescription';
+import VoiceRec from './src/screen/VoiceRec'
 
 export default function App() {
   return (
-    <ObjectDescriptionScreen />
+    <VoiceRec />
   );
 }
 
