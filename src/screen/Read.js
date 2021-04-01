@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import { getDescription, takePicture, pickImage } from '../utils'
+import { read, takePicture, pickImage } from '../utils'
 
 
 export default function Describe() {
@@ -18,13 +18,14 @@ export default function Describe() {
   let camera;
   const [state, setState] = useState({
     hasPermission: null,
-    cameraType: Camera.Constants.Type.back
+    cameraType: Camera.Constants.Type.back,
   });
+
 
   useEffect(() => {
     getPermissionAsync();
     getFilePermissions();
-    console.log("Describe", state);
+    console.log("Read", state);
   }, []);
 
   const getFilePermissions = async () => {
@@ -54,6 +55,7 @@ export default function Describe() {
   }
 
   const handleCameraType = () => {
+    console.log("Change Cam");
     const cameraType = state.cameraType;
 
     setState({
@@ -65,14 +67,14 @@ export default function Describe() {
     });
   }
 
-  const takePictureAndGetDescription = async () => {
+  const takePictureAndRead = async () => {
     let uri = await takePicture(camera);
-    getDescription(uri);
+    read(uri);
   }
 
-  const choosePictureAndGetDescription = async () => {
+  const choosePictureAndRead = async () => {
     let result = await pickImage();
-    if (!result.cancelled) getDescription(result.uri);
+    if (!result.cancelled) read(result.uri);
   }
 
   const focused = useIsFocused();
@@ -91,7 +93,7 @@ export default function Describe() {
                 alignItems: 'center',
                 backgroundColor: 'transparent'
               }}
-              onPress={() => choosePictureAndGetDescription()}>
+              onPress={() => choosePictureAndRead()}>
               <Ionicons
                 name="ios-photos"
                 style={{ color: "#fff", fontSize: 40 }}
@@ -103,7 +105,7 @@ export default function Describe() {
                 alignItems: 'center',
                 backgroundColor: 'transparent',
               }}
-              onPress={() => takePictureAndGetDescription()}
+              onPress={() => takePictureAndRead()}
             >
               <FontAwesome
                 name="camera"

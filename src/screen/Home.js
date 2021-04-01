@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { Audio } from 'expo-av';
@@ -12,25 +13,28 @@ import {
 import { command } from '../utils';
 
 
-export default function Home() {
+export default function Home({ navigation }) {
 
     let camera;
-    const [recording, setRecording] = React.useState();
-    const [hasPermission, setPermission] = React.useState();
-    const [cameraType, setCameraType] = React.useState(Camera.Constants.Type.back);
+    const [recording, setRecordingState] = React.useState();
+    const [state, setCameraState] = useState({
+        hasPermission: null,
+        cameraType: Camera.Constants.Type.back,
+    });
     const micColour = {
         micNotRecordingColour: "#7AEEBA",
         micRecordingColour: "#DD2F2F",
     };
 
     useEffect(() => {
+        console.log("Home", state);
         getPermissions();
     }, []);
 
     const getPermissions = async () => {
         // Camera Permission
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
-        setPermission({ hasPermission: status === 'granted' });
+        setCameraState({ ...state, hasPermission: status === 'granted' });
     }
 
     const recordingOptions = {
@@ -72,7 +76,7 @@ export default function Home() {
             const recording = new Audio.Recording();
             await recording.prepareToRecordAsync(recordingOptions);
             await recording.startAsync();
-            setRecording(recording);
+            setRecordingState(recording);
             console.log('Recording started');
         } catch (err) {
             console.error('Failed to start recording', err);
@@ -81,28 +85,29 @@ export default function Home() {
 
     async function stopRecording() {
         console.log('Stopping recording..');
-        setRecording(undefined);
+        setRecordingState(undefined);
         await recording.stopAndUnloadAsync();
         const uri = recording.getURI();
         console.log('Recording stopped and stored at', uri);
-        command(uri);
+        command(uri, navigation);
     }
 
-    if (hasPermission === null) {
+    const focused = useIsFocused();
+    if (state.hasPermission === null) {
         return <View />
-    } else if (hasPermission === false) {
+    } else if (state.hasPermission === false) {
         return <Text>No Access to Camera!</Text>
     } else {
         return (
             <View style={styles.container}>
-                <Camera style={{ flex: 1 }} type={cameraType} ref={ref => { camera = ref }}>
+                {focused && <Camera style={{ flex: 1 }} type={state.cameraType} ref={ref => { camera = ref }}>
                     <View style={{ flex: 1, flexDirection: "column", justifyContent: "space-around", margin: 30 }}>
-                        <Text style={styles.textStyle}>Noon Gil</Text>
                         <TouchableOpacity onPress={recording ? stopRecording : startRecording} style={styles.helpLink} >
                             <MaterialIcons name="mic" size={280} color={recording ? micColour.micRecordingColour : micColour.micNotRecordingColour} style={styles.outerCircle} />
                         </TouchableOpacity>
                     </View>
                 </Camera>
+                }
             </View>
         );
     }
@@ -112,6 +117,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: 'black'
     },
     helpLink: {
         paddingVertical: 15,

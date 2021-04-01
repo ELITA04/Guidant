@@ -1,6 +1,6 @@
 import { SERVER_URL } from '../config';
 
-const command = async (audioUri) => {
+const command = async (audioUri, navigate) => {
 
     let apiUrl = SERVER_URL + '/command';
     let name = 'command_audio.' + audioUri.substr(-3);
@@ -21,7 +21,11 @@ const command = async (audioUri) => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                console.log(responseJson);
+                if (responseJson.command === 'describe') {
+                    navigation.navigate('Describe');
+                } else if (responseJson.command === 'read') {
+                    navigation.navigate('Read')
+                }
             })
             .catch(error => {
                 console.error(error);
