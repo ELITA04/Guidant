@@ -4,8 +4,9 @@ import { SERVER_URL } from '../config';
 
 const getDescription = async (photoUri) => {
 
+    Speech.speak("I will now describe what I can see.");
+
     let apiUrl = SERVER_URL + '/describe';
-    console.log(apiUrl);
     let manipulatedObj = await ImageManipulator.manipulateAsync(
         photoUri,
         [{ resize: { width: 200 } }],
@@ -29,10 +30,11 @@ const getDescription = async (photoUri) => {
             .then(response => response.json())
             .then(responseJson => {
                 let caption = responseJson.description.captions[0].text;
-                Speech.speak(caption);
+                Speech.speak("I can see " + caption);
             })
             .catch(error => {
                 console.error(error);
+                Speech.speak("I'm sorry, an error has occured. Please try again.");
             });
     } catch (e) {
         console.log("Error", e)

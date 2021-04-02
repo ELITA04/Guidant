@@ -21,7 +21,6 @@ const command = async (audioUri, navigation) => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                console.log(responseJson);
                 if (responseJson.command === 'describe') {
                     navigation.navigate('Describe');
                 } else if (responseJson.command === 'read') {
@@ -30,6 +29,7 @@ const command = async (audioUri, navigation) => {
             })
             .catch(error => {
                 console.error(error);
+                Speech.speak("I'm sorry, an error has occured. Please try again.");
             });
     } catch (e) {
         console.log("Error", e)

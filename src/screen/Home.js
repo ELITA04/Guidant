@@ -70,7 +70,7 @@ export default function Home({ navigation }) {
                 playsInSilentModeIOS: true,
                 shouldDuckAndroid: true,
                 interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-                playThroughEarpieceAndroid: true,
+                playThroughEarpieceAndroid: false,
             });
             console.log('Starting recording..');
             const recording = new Audio.Recording();
@@ -102,7 +102,7 @@ export default function Home({ navigation }) {
             <View style={styles.container}>
                 {focused && <Camera style={{ flex: 1 }} type={state.cameraType} ref={ref => { camera = ref }}>
                     <View style={{ flex: 1, flexDirection: "column", justifyContent: "space-around", margin: 30 }}>
-                        <TouchableOpacity onPress={recording ? stopRecording : startRecording} style={styles.helpLink} >
+                        <TouchableOpacity onPressIn={startRecording} onPressOut={stopRecording} style={styles.helpLink} >
                             <MaterialIcons name="mic" size={280} color={recording ? micColour.micRecordingColour : micColour.micNotRecordingColour} style={styles.outerCircle} />
                         </TouchableOpacity>
                     </View>
