@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
-import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import * as FileSystem from 'expo-file-system';
 import {
   Text,
@@ -92,8 +92,8 @@ export default function Describe() {
                 backgroundColor: 'transparent'
               }}
               onPress={() => choosePictureAndGetDescription()}>
-              <Ionicons
-                name="ios-photos"
+              <MaterialIcons
+                name="image"
                 style={{ color: "#fff", fontSize: 40 }}
               />
             </TouchableOpacity>

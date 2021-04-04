@@ -14,19 +14,19 @@ export default function Help() {
             <ScrollView>
                 <Text style={styles.textStyle}>Guidant</Text>
                 <Card style={styles.card}>
-                    <TouchableOpacity onPress={() => speakMessage('This is Object Detection, it does the following... blah blah blah')}>
-                        <MaterialIcons name="mic" size={100} color="#7AEEBA" style={styles.icon} />
+                    <TouchableOpacity onPress={() => speakMessage('This tool will give you a description of your surrounding environment. Point the camera in your desired direction and click on the capture button. Once captured, the phone will speak what is infront of you.')}>
+                        <MaterialIcons name="preview" size={100} color="#801515" style={styles.icon} />
                     </TouchableOpacity>
                     <Text style={styles.title}>Describe</Text>
-                    <Text style={styles.content}>Describes the scenario</Text>
+                    <Text style={styles.content}>This tool will give you a description of your surrounding environment. Point the camera in your desired direction and click on the capture button. Once captured, the phone will speak what is infront of you.</Text>
                 </Card>
 
                 <Card style={styles.card}>
-                    <TouchableOpacity onPress={() => speakMessage('This is Optical Character Recognition, it does the following... blah blah blah')}>
-                        <MaterialIcons name="text-snippet" size={100} color="#7AEEBA" style={styles.icon} />
+                    <TouchableOpacity onPress={() => speakMessage('This tool will help you read any document or text. Point the camera over the document or text and click on the capture button. Once captured, the phone will read what is in the document or the text in front of you.')}>
+                        <MaterialIcons name="plagiarism" size={100} color="#801515" style={styles.icon} />
                     </TouchableOpacity>
                     <Text style={styles.title}>Read</Text>
-                    <Text style={styles.content}>Reads your document</Text>
+                    <Text style={styles.content}>This tool will help you read any document or text. Point the camera over the document or text and click on the capture button. Once captured, the phone will read what is in the document or the text in front of you.</Text>
                 </Card>
             </ScrollView>
         </View>
@@ -52,22 +52,24 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 36,
         fontFamily: 'sans-serif',
         width: '100%',
+        textAlign: 'center'
     },
     content: {
-        fontSize: 32,
+        fontSize: 20,
         fontFamily: 'sans-serif',
         width: '100%',
+        textAlign: 'justify'
     },
     textStyle: {
-        color: '#FFBF00',
+        color: '#801515',
         fontSize: 40,
         fontWeight: 'bold',
         lineHeight: 40,
         textAlign: 'center',
-        textShadowColor: '#D50000',
+        textShadowColor: '#AA3939',
         fontFamily: 'sans-serif',
         textShadowRadius: 4,
         textShadowOffset: { width: 2, height: 2 },
