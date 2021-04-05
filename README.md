@@ -1,4 +1,6 @@
-** Link to the server repo: **
+# Guidant
+
+**Link to the server repo:**
 
 ## Inspiration
 
