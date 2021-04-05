@@ -1,3 +1,5 @@
+** Link to the server repo: **
+
 ## Inspiration
 
 The inspiration for creating the application came while we were watching a show. This show highlighted the troubles and tribulations that the visually impaired face on a day-to-day basis. It brought attention to the troubles that they face while performing trivial tasks like seeing what is in front of them, reading labels, not being able to open their doors etc. This had a deep impact on us and so we started researching visual impairment. To our surprise, we found an estimated **62 million people** live with vision impairment; of which **54 million people** have low vision and **8 million** are blind in India alone. These numbers are higher among the elders and research shows that these numbers will increase even more in the future. Over four-fifth of visual impairment among elderly persons is either avoidable or treatable.
