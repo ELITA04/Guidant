@@ -1,6 +1,6 @@
 # Guidant
 
-**Link to the server repo:**
+**Link to the server repo:** https://github.com/kad99kev/Guidiant-API
 
 ## Inspiration
 
